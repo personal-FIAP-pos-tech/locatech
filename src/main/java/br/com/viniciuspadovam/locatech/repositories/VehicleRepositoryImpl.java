@@ -65,8 +65,10 @@ public class VehicleRepositoryImpl implements VehicleRepository {
 
 	@Override
 	public Integer delete(long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.jdbcClient
+			.sql("DELETE FROM vehicles WHERE id = :id")
+			.param("id", id)
+			.update();
 	}
 
 }
