@@ -38,8 +38,15 @@ public class VehicleRepositoryImpl implements VehicleRepository {
 
 	@Override
 	public Integer save(Vehicle vehicle) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.jdbcClient
+			.sql("INSERT INTO vehicles (brand, model, license_plate, year, color, daily_price) VALUES (:brand, :model, :licensePlate, :year, :color, :dailyPrice)")
+			.param("brand", vehicle.getBrand())
+			.param("model", vehicle.getModel())
+			.param("licensePlate", vehicle.getLicensePlate())
+			.param("year", vehicle.getYear())
+			.param("color", vehicle.getColor())
+			.param("dailyPrice", vehicle.getDailyPrice())
+			.update();
 	}
 
 	@Override
