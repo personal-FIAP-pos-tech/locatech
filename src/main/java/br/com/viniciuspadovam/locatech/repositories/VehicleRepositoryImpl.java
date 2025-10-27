@@ -51,8 +51,16 @@ public class VehicleRepositoryImpl implements VehicleRepository {
 
 	@Override
 	public Integer update(long id, Vehicle vehicle) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.jdbcClient
+			.sql("UPDATE vehicles SET brand = :brand, model = :model, license_plate = :licensePlate, year = :year, color = :color, daily_price = dailyPrice WHERE id = :id")
+			.param("id", id)
+			.param("brand", vehicle.getBrand())
+			.param("model", vehicle.getModel())
+			.param("licensePlate", vehicle.getLicensePlate())
+			.param("year", vehicle.getYear())
+			.param("color", vehicle.getColor())
+			.param("dailyPrice", vehicle.getDailyPrice())
+			.update();
 	}
 
 	@Override
