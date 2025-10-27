@@ -19,14 +19,21 @@ public class VehicleRepositoryImpl implements VehicleRepository {
 
 	@Override
 	public Optional<Vehicle> findById(long id) {
-		// TODO Auto-generated method stub
-		return Optional.empty();
+		return this.jdbcClient
+			.sql("SELECT * FROM vehicles WHERE id = :id")
+			.param("id", id)
+			.query(Vehicle.class)
+			.optional();
 	}
 
 	@Override
 	public List<Vehicle> findAll(int size, int offset) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.jdbcClient
+			.sql("SELECT * FROM vehicles LIMIT :size OFFSET :offset")
+			.param("size", size)
+			.param("offset", offset)
+			.query(Vehicle.class)
+			.list();
 	}
 
 	@Override
