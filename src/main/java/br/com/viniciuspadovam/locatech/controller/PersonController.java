@@ -15,53 +15,53 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.viniciuspadovam.locatech.entities.Vehicle;
-import br.com.viniciuspadovam.locatech.services.VehicleService;
+import br.com.viniciuspadovam.locatech.entities.Person;
+import br.com.viniciuspadovam.locatech.services.PersonService;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/api/v1/vehicles")
+@RequestMapping("/api/v1/people")
 @Slf4j
-public class VehicleController {
+public class PersonController {
+
+	private final PersonService personService;
 	
-	private final VehicleService vehicleService;
-	
-	public VehicleController(VehicleService vehicleService) {
-		this.vehicleService = vehicleService;
+	public PersonController(PersonService personService) {
+		this.personService = personService;
 	}
 
 	@GetMapping
-	public ResponseEntity<List<Vehicle>> findAll(@RequestParam int page, @RequestParam int size) {
-		log.info("GET => /api/v1/vehicles");
-		var vehicles = this.vehicleService.findAll(page, size);
+	public ResponseEntity<List<Person>> findAll(@RequestParam int page, @RequestParam int size) {
+		log.info("GET => /api/v1/people");
+		var vehicles = this.personService.findAll(page, size);
 		return ResponseEntity.ok(vehicles);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Optional<Vehicle>> findById(@PathVariable int id) {
-		log.info("GET => /api/v1/vehicles/" + id);
-		var vehicles = this.vehicleService.findById(id);
-		return ResponseEntity.ok(vehicles);
+	public ResponseEntity<Optional<Person>> findById(@PathVariable int id) {
+		log.info("GET => /api/v1/people" + id);
+		var people = this.personService.findById(id);
+		return ResponseEntity.ok(people);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Void> save(@RequestBody Vehicle vehicle) {
-		log.info("POST => /api/v1/vehicles");
-		this.vehicleService.save(vehicle);
+	public ResponseEntity<Void> save(@RequestBody Person person) {
+		log.info("POST => /api/v1/people");
+		this.personService.save(person);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> update(@PathVariable long id, @RequestBody Vehicle vehicle) {
-		log.info("PUT => /api/v1/vehicles/" + id);
-		this.vehicleService.update(id, vehicle);
+	public ResponseEntity<Void> update(@PathVariable long id, @RequestBody Person person) {
+		log.info("PUT => /api/v1/people/" + id);
+		this.personService.update(id, person);
 		return ResponseEntity.ok().build();
 	}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable long id) {
-		log.info("DELETE => /api/v1/vehicles/" + id);
-		this.vehicleService.delete(id);
+		log.info("DELETE => /api/v1/people/" + id);
+		this.personService.delete(id);
 		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 	}
 

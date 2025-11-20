@@ -11,7 +11,7 @@ public class Rent {
 	private long id;
 	private long personId;
 	private long vehicleId;
-	private String vehicle;
+	private String vehicleModel;
 	private String personCpf;
 	private String personName;
 	private LocalDate beginRentDate;
